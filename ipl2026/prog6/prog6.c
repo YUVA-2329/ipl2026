@@ -4,7 +4,7 @@
 #define ROWS 25
 #define COLS 50
 
-/* Structure for Circle */
+
 typedef struct
 {
     int centerX;
@@ -24,9 +24,9 @@ int main()
 
     Circle c;
 
-    c.centerX = 25;
-    c.centerY = 12;
-    c.radius = 10;
+    scanf("%d",&c.centerX);
+    scanf("%d",&c.centerY);
+    scanf("%d",&c.radius);
 
     initializeBuffer(buffer);
 
