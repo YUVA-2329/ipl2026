@@ -4,9 +4,9 @@ union decision
 {
     unsigned char flags;
 
-    struct field
+    struct
     {
-        unsigned int your_choice           : 1;
+        unsigned int your_choice          : 1;
         unsigned int your_mothers_choice  : 1;
         unsigned int your_fathers_choice  : 1;
         unsigned int socially_acceptable  : 1;
@@ -14,16 +14,12 @@ union decision
         unsigned int do_you_aptitude      : 1;
         unsigned int do_you_likeit        : 1;
         unsigned int final_decision       : 1;
-
     } field;
 };
 
 union decision input();
-
 void make_decision(union decision *d);
-
 void print_decision(union decision d);
-
 void print_conclusion_based_on_flags(union decision d);
 
 void printBits(unsigned char n)
@@ -41,29 +37,37 @@ void printBits(unsigned char n)
 union decision input()
 {
     union decision d;
+    unsigned int temp;
 
     d.flags = 0;
 
     printf("Enter your choice (0/1): ");
-    scanf("%u", &d.field.your_choice);
+    scanf("%u", &temp);
+    d.field.your_choice = temp;
 
     printf("Enter your mother's choice (0/1): ");
-    scanf("%u", &d.field.your_mothers_choice);
+    scanf("%u", &temp);
+    d.field.your_mothers_choice = temp;
 
     printf("Enter your father's choice (0/1): ");
-    scanf("%u", &d.field.your_fathers_choice);
+    scanf("%u", &temp);
+    d.field.your_fathers_choice = temp;
 
     printf("Is it socially acceptable? (0/1): ");
-    scanf("%u", &d.field.socially_acceptable);
+    scanf("%u", &temp);
+    d.field.socially_acceptable = temp;
 
     printf("Is it financially viable? (0/1): ");
-    scanf("%u", &d.field.financially_viable);
+    scanf("%u", &temp);
+    d.field.financially_viable = temp;
 
     printf("Do you have aptitude? (0/1): ");
-    scanf("%u", &d.field.do_you_aptitude);
+    scanf("%u", &temp);
+    d.field.do_you_aptitude = temp;
 
     printf("Do you like it? (0/1): ");
-    scanf("%u", &d.field.do_you_likeit);
+    scanf("%u", &temp);
+    d.field.do_you_likeit = temp;
 
     return d;
 }
@@ -83,31 +87,22 @@ void print_decision(union decision d)
 {
     printf("\n------ Decision Report ------\n");
 
-    printf("Your Choice           : %u\n", d.field.your_choice);
-
-    printf("Mother's Choice       : %u\n", d.field.your_mothers_choice);
-
-    printf("Father's Choice       : %u\n", d.field.your_fathers_choice);
-
-    printf("Socially Acceptable   : %u\n", d.field.socially_acceptable);
-
-    printf("Financially Viable    : %u\n", d.field.financially_viable);
-
-    printf("You Have Aptitude     : %u\n", d.field.do_you_aptitude);
-
-    printf("You Like It           : %u\n", d.field.do_you_likeit);
-
-    printf("Final Decision        : %u\n", d.field.final_decision);
+    printf("Your Choice         : %u\n", d.field.your_choice);
+    printf("Mother's Choice     : %u\n", d.field.your_mothers_choice);
+    printf("Father's Choice     : %u\n", d.field.your_fathers_choice);
+    printf("Socially Acceptable : %u\n", d.field.socially_acceptable);
+    printf("Financially Viable  : %u\n", d.field.financially_viable);
+    printf("You Have Aptitude   : %u\n", d.field.do_you_aptitude);
+    printf("You Like It         : %u\n", d.field.do_you_likeit);
+    printf("Final Decision      : %u\n", d.field.final_decision);
 
     if(d.field.final_decision)
     {
-        printf("\nNarrative:\n");
-        printf("You should proceed with this decision.\n");
+        printf("\nYou should proceed with this decision.\n");
     }
     else
     {
-        printf("\nNarrative:\n");
-        printf("This decision may not be suitable right now.\n");
+        printf("\nThis decision may not be suitable right now.\n");
     }
 }
 
@@ -118,7 +113,6 @@ void print_conclusion_based_on_flags(union decision d)
     printf("Flags Decimal Value = %u\n", d.flags);
 
     printf("Flags Binary Value  = ");
-
     printBits(d.flags);
 
     if(d.flags == 255)
